@@ -2,11 +2,11 @@ import os
 import numpy as np
 import tensorflow as tf
 import random
-from mock import MagicMock
+from unittest.mock import MagicMock
 
 
 def _print_success_message():
-    print('Tests Passed')
+    return print('Tests Passed')
 
 
 def test_folder_path(cifar10_dataset_folder_path):
@@ -172,11 +172,11 @@ def test_output(output):
     _print_success_message()
 
 
-def test_conv_net(conv_net, n_layers, n_fc_layers):
+def test_conv_net(conv_net):
     test_x = tf.placeholder(tf.float32, [None, 32, 32, 3])
     test_k = tf.placeholder(tf.float32)
 
-    logits_out = conv_net(test_x, test_k, n_layers, n_fc_layers)
+    logits_out = conv_net(test_x, test_k)
 
     assert logits_out.get_shape().as_list() == [None, 10],\
         'Incorrect Model Output.  Found {}'.format(logits_out.get_shape().as_list())
